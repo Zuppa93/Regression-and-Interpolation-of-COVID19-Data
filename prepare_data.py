@@ -61,7 +61,7 @@ countries = countries.set_index(pandas.Index([8,9,10,11,12,13,14]))
 
 result = pandas.concat([data,countries])
 
-result.to_csv("./dataset.csv")
+result.to_csv("./dataset.csv",index=False)
 
 
 
