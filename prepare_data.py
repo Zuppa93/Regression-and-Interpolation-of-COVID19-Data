@@ -1,6 +1,5 @@
 import pandas as pandas
 
-
 # First we read the data from the file
 data = pandas.read_csv("./time_series_covid19_confirmed_global.csv")
 
@@ -8,7 +7,6 @@ data = pandas.read_csv("./time_series_covid19_confirmed_global.csv")
 
 # First we will delete all Columns we don't need
 data = data.drop(columns=['Province/State','Lat','Long'])
-
 
 # We will now note all Countries that have more than 1 province or state the sends information
 # Australia
@@ -39,7 +37,6 @@ UK          =          UK.groupby('Country/Region').agg('sum')
 
 # Next step is to delete those 7 countries from the data Dataframe and to replace them with the new collapsed ones
 # The result will be written into a new .csv file
-# Document steps
 
 # The countries, that occur multiple times, must be deleted from die data DataFrame first.
 
@@ -62,36 +59,3 @@ countries = countries.set_index(pandas.Index([8,9,10,11,12,13,14]))
 result = pandas.concat([data,countries])
 
 result.to_csv("./dataset.csv",index=False)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

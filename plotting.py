@@ -5,14 +5,9 @@ df = pandas.read_csv("./dataset.csv", index_col="Country/Region")
 
 days = df.columns
 ticks = days[0::15]
-
-fig = plt.figure()
-ax = fig.add_axes([0,0,1,1])
+country_names = list(df.index)
 
 length = len(df.index)
-print(length)
-
-country_names = list(df.index)
 
 for i in range(length):
     print(i)
