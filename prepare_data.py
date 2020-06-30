@@ -1,7 +1,8 @@
 import pandas as pandas
 
 # First we read the data from the file
-data = pandas.read_csv("./time_series_covid19_confirmed_global.csv")
+#data = pandas.read_csv("./time_series_covid19_confirmed_global.csv")
+data = pandas.read_csv("./time_series_covid19_confirmed_global_after.csv")
 
 # Working with the Dataframe
 
@@ -58,4 +59,4 @@ countries = countries.set_index(pandas.Index([8,9,10,11,12,13,14]))
 
 result = pandas.concat([data,countries])
 
-result.to_csv("./dataset.csv",index=False)
+result.to_csv("./dataset_after.csv",index=False)
