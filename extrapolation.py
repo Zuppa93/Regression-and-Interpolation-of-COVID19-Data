@@ -43,7 +43,7 @@ strings = milestones.astype(str)
 
 
 for i in range(length):
-#for i in range(0):
+#for i in range(10):
     
     mpl.style.use('seaborn')
     fig = plt.figure()
@@ -56,12 +56,13 @@ for i in range(length):
     ax.bar(days_before,country,color=color_before,label='After prediction date')
     
     # Interpolation
-    f = interpolate.interp1d(days_before,country,fill_value='extrapolate')
+    f = interpolate.interp1d(days_before,country,kind='linear',fill_value='extrapolate')
     country_pred_interpolation = f(days_after)
     ax.plot(days_after,country_pred_interpolation,color=color_interpolation,label='Interpolation')
     
     # Regression numpy
-    regression = np.poly1d(np.polyfit(days_before,country,3))
+    f2 = np.polyfit(days_before,country,4)
+    regression = np.poly1d(f2)
     country_pred_regression = regression(days_after)
     ax.plot(days_after,country_pred_regression,color=color_regression,label='Regression')
 
@@ -74,13 +75,14 @@ for i in range(length):
     # Legend
     legend = ax.legend(loc='upper left',shadow=False,fontsize='medium')
     
-    file_name = "./Extrapolations/"+countries[i]+".png"
+    file_name = "./RegressionsDegree4/"+countries[i]+".png"
     plt.savefig(file_name,dpi=300,bbox_inches='tight')
     
     plt.show()
     
     # Errorcalculation
     # We want to calculate the differences in seven day intervals plus the last and first day
+
     for j in range(len(milestones)):
         temp = country_pred_interpolation[milestones[j]] / country_after[milestones[j]]
         differences_interpolation[j] = abs(temp-1)
@@ -107,8 +109,7 @@ b2 = ax.bar(milestones+bar_width,average_difference_regression   ,width=bar_widt
 
 legend = ax.legend(loc='upper left',shadow=False,fontsize='medium')
 
-plt.savefig('AverageBarChart.png',dpi=300,bbox_inches='tight')
+plt.savefig('AverageBarChartDegree4.png',dpi=300,bbox_inches='tight')
 
 plt.show()
      
-    
